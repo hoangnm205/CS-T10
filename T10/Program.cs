@@ -6,26 +6,36 @@ class Program
 {
     static void Main(string[] args)
     {
-        SqlConnection conn = null;
+        //SqlConnection conn = null;
         try
         {
-            string connStr = "Data Source=172.16.3.167,1433;Initial Catalog=T4;User Id=sa;Password=123123";
-            conn = new SqlConnection(connStr);
 
-            conn.Open();
 
-            if (conn.State == System.Data.ConnectionState.Open)
-            {
-                Console.WriteLine("Db Connected");
 
-                // 1. SELECT Ko tham so
-                string sql = "SELECT * FROM CUSTOMERS";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                Console.WriteLine("Field COunt = {0}",reader.FieldCount);
-                Console.WriteLine("COL 1 = {0}", reader.GetName(1));
-                while (reader.Read()) // row pointer
-                {
+            CustomerManager manager = new CustomerManager();
+            manager.LoadData();
+            manager.PrintList();
+
+
+
+            //string connStr = "Data Source=172.16.3.167,1433;Initial Catalog=T4;User Id=sa;Password=123123";
+            //conn = new SqlConnection(connStr);
+
+            //conn.Open();
+
+            //if (conn.State == System.Data.ConnectionState.Open)
+            //{
+            //    Console.WriteLine("Db Connected");
+
+            //    // 1. SELECT Ko tham so
+            //    string sql = "SELECT * FROM CUSTOMERS";
+            //    SqlCommand cmd = new SqlCommand(sql, conn);
+                
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    Console.WriteLine("Field COunt = {0}",reader.FieldCount);
+            //    Console.WriteLine("COL 1 = {0}", reader.GetName(1));
+            //    while (reader.Read()) // row pointer
+                //{
                     
                     //Console.WriteLine("Id={0},Name={1}", reader[0], reader[1]);
                     //for (int i = 0; i < reader.FieldCount; i++)
@@ -33,8 +43,8 @@ class Program
                     //    Console.WriteLine(reader[i]);
                     //}
 
-                    Console.WriteLine("Id={0},Phone={1}", reader["ID"], reader["PHONE"]);
-                }
+                    //Console.WriteLine("Id={0},Phone={1}", reader["ID"], reader["PHONE"]);
+                //}
 
                 // 2. SELECT co tham so WHERE ID = ?
 
@@ -63,7 +73,9 @@ class Program
 
                 //int insertedRows = cmd.ExecuteNonQuery();
                 //Console.WriteLine(insertedRows);
-            }
+
+
+            //}
             
         }
         catch (Exception ex)
@@ -72,7 +84,7 @@ class Program
         }
         finally
         {
-            conn.Close();
+            //conn.Close();
         }
         
     }
